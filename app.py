@@ -1,10 +1,11 @@
-from flask import Flask
+from telegram import Bot
 
-app=Flask(__name__)
+TOKEN="6744430799:AAECPtL1iXE6RFFAyYXTKg9bAZL4xTICL-4"
 
-@app.route("/")
-def home():
-    return "Hello"
+bot = Bot(TOKEN)
 
-if __name__=="__main__":
-    app.run(debug=True)
+last_update=bot.getUpdates()[-1]
+user = last_update.message.from_user.id
+message=last_update.message.text
+
+bot.send_message(chat_id=user,text=message)
